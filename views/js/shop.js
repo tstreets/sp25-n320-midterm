@@ -54,6 +54,7 @@ function checkPdfButtons() {
   } else {
     viewBtnRef.disabled = "";
     downloadBtnRef.disabled = "";
+    updatePdf();
   }
 }
 
@@ -70,4 +71,21 @@ function viewPdf() {
 function downloadPdf() {
   invoice.download();
 }
+
+function updatePdf() {
+  invoice.reset();
+  invoice.addCompanyDetails();
+  invoice.addCustomerDetails(nameRef.value, emailRef.value);
+  invoice.addInvoiceNumberAndDate();
+  invoice.showCart(cart);
+  viewPdf();
+}
+
 checkPdfButtons();
+
+// TODO: DELETE
+cart.push({ name: "fork", price: "599.99" });
+nameRef.value = "Ty";
+emailRef.value = "ty@ty.ty";
+checkPdfButtons();
+viewBtnRef.click();
